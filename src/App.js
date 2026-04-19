@@ -462,7 +462,7 @@ const App = () => {
             </div>
 
             {historyItems.length === 0 ? (
-              <p className="history-empty">Your solved expressions will show up here.</p>
+              <p className="history-empty">Your solved expressions will show up here..</p>
             ) : (
               <div className="history-list">
                 {historyItems.map((item) => (
