@@ -1,40 +1,42 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class KeyPadComponent extends Component { 
-  render() {
-    return (
+const BUTTONS = [
+  { label: 'C', value: 'C', variant: 'accent' },
+  { label: 'CE', value: 'CE', variant: 'accent' },
+  { label: '(', value: '(', variant: 'operator' },
+  { label: ')', value: ')', variant: 'operator' },
+  { label: '7', value: '7', variant: 'number' },
+  { label: '8', value: '8', variant: 'number' },
+  { label: '9', value: '9', variant: 'number' },
+  { label: '/', value: '/', variant: 'operator' },
+  { label: '4', value: '4', variant: 'number' },
+  { label: '5', value: '5', variant: 'number' },
+  { label: '6', value: '6', variant: 'number' },
+  { label: 'x', value: '*', variant: 'operator' },
+  { label: '1', value: '1', variant: 'number' },
+  { label: '2', value: '2', variant: 'number' },
+  { label: '3', value: '3', variant: 'number' },
+  { label: '-', value: '-', variant: 'operator' },
+  { label: '0', value: '0', variant: 'number wide' },
+  { label: '.', value: '.', variant: 'number' },
+  { label: '+', value: '+', variant: 'operator' },
+  { label: '=', value: '=', variant: 'equals' },
+];
 
-      <div className="button">
-        <button className="ml-9 mt-5 mb-4 border-solid rounded-lg bg-zinc-800 text-orange-500" name="(" onClick={e => this.props.onClick(e.target.name)}>(</button> 
-        <button className="ml-4 border-solid rounded-lg bg-zinc-800 text-orange-500" name="CE" onClick={e => this.props.onClick(e.target.name)}>CE</button>
-        <button className="ml-4 border-solid rounded-lg bg-zinc-800 text-orange-500" name=")" onClick={e => this.props.onClick(e.target.name)}>)</button>
-        <button className="ml-4 border-solid rounded-lg bg-zinc-800 text-orange-500" name="C" onClick={e => this.props.onClick(e.target.name)}>C</button><br/>
-
-
-        <button className="ml-9 mb-4 border-solid rounded-lg bg-zinc-800 text-slate-50" name="1" onClick={e => this.props.onClick(e.target.name)}>1</button>
-        <button className="ml-4 border-solid rounded-lg bg-zinc-800 text-slate-50" name="2" onClick={e => this.props.onClick(e.target.name)}>2</button>
-        <button className="ml-4 border-solid rounded-lg bg-zinc-800 text-slate-50" name="3" onClick={e => this.props.onClick(e.target.name)}>3</button>
-        <button className="ml-4 border-solid rounded-lg bg-zinc-800 text-orange-500" name="+" onClick={e => this.props.onClick(e.target.name)}>+</button><br/>
-
-
-        <button className="ml-9 mb-4 border-solid rounded-lg bg-zinc-800 text-slate-50" name="4" onClick={e => this.props.onClick(e.target.name)}>4</button>
-        <button className="ml-4 border-solid rounded-lg bg-zinc-800 text-slate-50" name="5" onClick={e => this.props.onClick(e.target.name)}>5</button>
-        <button className="ml-4 border-solid rounded-lg bg-zinc-800 text-slate-50" name="6" onClick={e => this.props.onClick(e.target.name)}>6</button>
-        <button className="ml-4 border-solid rounded-lg bg-zinc-800 text-orange-500" name="-" onClick={e => this.props.onClick(e.target.name)}>-</button><br/>
-
-        <button className="ml-9 mb-4 border-solid rounded-lg bg-zinc-800 text-slate-50" name="7" onClick={e => this.props.onClick(e.target.name)}>7</button>
-        <button className="ml-4 border-solid rounded-lg bg-zinc-800 text-slate-50" name="8" onClick={e => this.props.onClick(e.target.name)}>8</button>
-        <button className="ml-4 border-solid rounded-lg bg-zinc-800 text-slate-50" name="9" onClick={e => this.props.onClick(e.target.name)}>9</button>
-        <button className="ml-4 border-solid rounded-lg bg-zinc-800 text-orange-500" name="*" onClick={e => this.props.onClick(e.target.name)}>x</button><br/>
-
-
-        <button className="ml-9 mb-4 border-solid rounded-lg bg-zinc-800 text-orange-500" name="." onClick={e => this.props.onClick(e.target.name)}>.</button>
-        <button className="ml-4 border-solid rounded-lg bg-zinc-800 text-slate-50" name="0" onClick={e => this.props.onClick(e.target.name)}>0</button>
-        <button className="ml-4 border-solid rounded-lg bg-orange-500 text-slate-50" name="=" onClick={e => this.props.onClick(e.target.name)}>=</button>
-        <button className="ml-4 border-solid rounded-lg bg-zinc-800 text-orange-500" name="/" onClick={e => this.props.onClick(e.target.name)}>÷</button><br/>
-    </div>
-    )
-  }
-}
+const KeyPadComponent = ({ onClick }) => (
+  <div className="keypad-grid">
+    {BUTTONS.map((button) => (
+      <button
+        key={`${button.label}-${button.value}`}
+        className={`calc-button ${button.variant}`}
+        name={button.value}
+        onClick={(event) => onClick(event.currentTarget.name)}
+        type="button"
+      >
+        {button.label}
+      </button>
+    ))}
+  </div>
+);
 
 export default KeyPadComponent;

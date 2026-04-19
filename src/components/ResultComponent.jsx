@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class ResultComponent extends Component {
-  render() {
-    let { result } = this.props;
+const formatDisplay = (value) => value.replace(/\*/g, 'x');
 
-    return (
-      <div className="result ml-5">
-        <p>{ result }</p>
-      </div>
-    )
-  }
-}
+const ResultComponent = ({ history, result }) => (
+  <div className="result">
+    <p className="result-history">{history}</p>
+    <p className="result-value">{formatDisplay(result)}</p>
+  </div>
+);
 
 export default ResultComponent;

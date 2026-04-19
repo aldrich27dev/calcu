@@ -1,41 +1,333 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+
+:root {
+  --bg: #07111f;
+  --bg-soft: #12243a;
+  --card: rgba(10, 18, 32, 0.88);
+  --card-edge: rgba(255, 255, 255, 0.08);
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --number: #142235;
+  --operator: #1f3a5b;
+  --accent: #f97316;
+  --accent-soft: #fb923c;
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+}
 
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
 body {
-  background-color: #000;
-}
-.result {
-  height: 60px;
-  background-color: #000;
-  width: 100%;
+  min-height: 100vh;
+  font-family: 'Space Grotesk', sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(249, 115, 22, 0.18), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.16), transparent 30%),
+    linear-gradient(135deg, var(--bg), #020617 65%);
+  color: var(--text);
 }
 
-.result p {
-  font-size: 40px;
-  margin: 5px;
-  color: white;
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 16px;
+}
+
+.calculator-card {
+  width: min(100%, 1100px);
+  min-height: calc(100vh - 32px);
+  background: var(--card);
+  border: 1px solid var(--card-edge);
+  border-radius: 32px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-copy {
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent-soft);
+  margin-bottom: 10px;
+}
+
+.card-copy h1 {
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.supporting-text {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.supporting-text span {
+  color: var(--text);
 }
 
 .calculator-body {
-  max-width: 400px;
-  margin: auto;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
-.button {
-  display: block;
-  background-color: #000;
+.calculator-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 18px;
+  flex: 1;
 }
 
-button {
-  width: 70px;
-  height: 70px;
-  font-size: 40px;
+.result {
+  min-height: 132px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 16px 8px 20px;
 }
 
+.result-history {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 10px;
+  min-height: 1.3rem;
+}
 
+.result-value {
+  width: 100%;
+  text-align: right;
+  font-size: clamp(2.5rem, 10vw, 3.9rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  word-break: break-all;
+}
+
+.insight-panel,
+.history-panel {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+}
+
+.insight-panel {
+  margin-bottom: 16px;
+  padding: 16px;
+}
+
+.panel-label {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent-soft);
+  margin-bottom: 10px;
+}
+
+.panel-copy {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: auto;
+}
+
+.calc-button {
+  border: 0;
+  border-radius: 20px;
+  min-height: 72px;
+  font: inherit;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
+}
+
+.calc-button:hover {
+  transform: translateY(-2px);
+}
+
+.calc-button:active {
+  transform: translateY(0);
+}
+
+.calc-button.number {
+  background: var(--number);
+}
+
+.calc-button.operator {
+  background: var(--operator);
+}
+
+.calc-button.accent,
+.calc-button.equals {
+  background: var(--accent);
+}
+
+.calc-button.wide {
+  grid-column: span 2;
+}
+
+.calc-button.equals {
+  box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.12);
+}
+
+.history-panel {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.history-subtitle,
+.history-empty,
+.history-insight {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.history-subtitle {
+  font-size: 0.95rem;
+}
+
+.history-clear {
+  border: 0;
+  background: rgba(249, 115, 22, 0.18);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.history-empty {
+  margin-top: 6px;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.history-item {
+  border: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  padding: 14px;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform 140ms ease, background-color 140ms ease;
+}
+
+.history-item:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.history-expression,
+.history-result {
+  font-weight: 600;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.card-footer a {
+  color: var(--text);
+}
+
+@media (max-width: 520px) {
+  .app-shell {
+    padding: 0;
+  }
+
+  .calculator-card {
+    width: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+    padding: 20px 16px 16px;
+    border: 0;
+  }
+
+  .calc-button {
+    min-height: 64px;
+    font-size: 1.4rem;
+  }
+
+  .card-copy h1 {
+    font-size: 1.8rem;
+  }
+
+  .calculator-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .history-panel {
+    max-height: none;
+  }
+
+  .card-footer {
+    margin-top: 16px;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+}
+
+@media (max-width: 860px) {
+  .calculator-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .calculator-card {
+    width: min(100%, 720px);
+  }
+}
