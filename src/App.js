@@ -483,7 +483,7 @@ const App = () => {
         </div>
 
         <footer className="card-footer">
-          <a href="https://aldrich27dev.github.io/aldrich" target="_blank" rel="noreferrer">
+          <a href="https://aldrich27dev.github.io/aldrich_newportfolio" target="_blank" rel="noreferrer">
             Portfolio
           </a>
           <span>Aldrich Naag</span>
